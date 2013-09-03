@@ -1,5 +1,8 @@
 for managing rails deployment
 -- see https://github.com/ecbypi/puppet-rails for more info
-class rails {
-  
+
+use like
+rails::application { 'planner':
+  user => 'me',
+  deploy_path => '/var/www' 
 }

@@ -4,8 +4,8 @@ node 'puppetmaster' {
 }
 
 node 'puppetclient' {
-	include git
-  rails::deploy { 'planner':
-    
+  rails::application { 'planner':
+    user => 'deployer',
+    ruby => '2.0.0-p247'
   }
 }

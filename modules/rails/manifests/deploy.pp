@@ -4,52 +4,16 @@
 
 # Use like:
 # rails::deploy { 'planner':
-#   user => 'me'
-#   deploy_path => '/var/www' 
+#   user => 'deployer',
 # }
 
 define rails::deploy(
   $application = $title,
   $deploy_path = '/var/www',
-  $user = 'deployer',
-  $user_id = 444,
-  $group = 'deployer',
-  $group_id = 444
+  $user,
+  $group,
 ) {
   $application_deploy_path = "${deploy_path}/${application}"
-
-  # the deployer user's group
-  group { $group:
-    ensure => present,
-    gid => $group_id,
-  }
-
-  # the deployer user
-  user { $user:
-    ensure => present,
-    uid => $user_id,
-    gid => $group,
-    system => true,
-    managehome => true,
-    home => "/home/${user}",
-    shell => '/bin/bash',
-    require => Group[$group]
-  }
-
-  # the deployer user's ssh keys
-  file { "/home/${user}/.ssh":
-    ensure => directory,
-    owner => $user,
-    mode => '0700',
-    require => User[$user]
-  }
-
-  file { "/home/${user}/.ssh/authorized_keys":
-    ensure => file,
-    owner => $user,
-    mode => '0700',
-    require => File["/home/${user}/.ssh"]
-  }
 
   file { $deploy_path:
     ensure => directory,
