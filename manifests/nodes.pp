@@ -3,6 +3,9 @@ node 'puppetmaster' {
 	include git
 }
 
-node 'client.puppet.dev' {
+node 'puppetclient' {
 	include git
+  rails::deploy { 'planner':
+    
+  }
 }

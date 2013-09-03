@@ -1,0 +1,5 @@
+for managing rails deployment
+-- see https://github.com/ecbypi/puppet-rails for more info
+class rails {
+  
+}
