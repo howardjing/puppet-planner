@@ -13,4 +13,13 @@ node 'puppetclient' {
     user => 'deployer',
     ruby => '2.0.0-p247'
   }
+
+  # nginx for serving web stuff
+  class { 'nginx': }
+  nginx::resource::vhost { 'staging.planner.dev':
+    ensure      => present,
+    try_files   => ['$uri', '@unicorn'],
+    location    => '@unicorn',
+    proxy       => 'http://staging.planner.dev:3000',
+  }
 }

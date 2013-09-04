@@ -1,3 +1,6 @@
+<% if @try_files -%>
+  try_files <% @try_files.each do |try| -%> <%= try %> <% end -%>;
+<% end -%>
   location <%= @location %> {
 <% if @location_cfg_prepend -%><% @location_cfg_prepend.sort_by {|k,v| k}.each do |key,value| -%>
     <%= key %>         <%= value %>;
