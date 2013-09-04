@@ -22,4 +22,7 @@ node 'puppetclient' {
     location    => '@unicorn',
     proxy       => 'http://staging.planner.dev:3000',
   }
+
+  # mongodb for storage
+  include mongodb
 }
