@@ -9,6 +9,9 @@ node 'puppetclient' {
   # nodejs for a javascript runtime for rails
   include nodejs
 
+  # mongodb
+  include mongodb
+
   # install rbenv + set up capistrano
   rails::application { $application_name:
     user => 'deployer',
