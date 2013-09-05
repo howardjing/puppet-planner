@@ -61,10 +61,17 @@ define rails::application(
   # === rails dependencies end ===
 
   # for capistrano
-  rails::deploy{ $application:
+  rails::deploy { $application:
     deploy_path => $deploy_path,
     user => $user,
     group => $group
+  }
+
+  # for unicorn
+  rails::unicorn { $application:
+    app_root          => "${deploy_path}/${application}/current",
+    user              => $user,
+    rails_environment => 'staging'
   }
 
 }

@@ -10,7 +10,7 @@ node 'puppetclient' {
   include nodejs
 
   # install rbenv + set up capistrano
-  rails::application { 'planner':
+  rails::application { $application_name:
     user => 'deployer',
     ruby => '2.0.0-p247'
   }
@@ -33,10 +33,19 @@ node 'puppetclient' {
     }
   }
   
+  nginx::resource::upstream { 'unicorn':
+    ensure  => present,
+    members => ["unix:/tmp/unicorn.${application_name}.sock fail_timeout=0"]
+  }
+
   nginx::resource::location { "${server_name}-rails":
     vhost => $server_name,
     location => '@unicorn',
-    proxy    => "http://${server_name}:${rails_port}"
+    location_custom_cfg => {
+      proxy_set_header  => ['X-Forwarded-For $proxy_add_x_forwarded_for', 'Host $http_host'],
+      proxy_redirect    => 'off',
+      proxy_pass        => "http://unicorn"
+    }
   }
   
   nginx::resource::location { "${server_name}-assets":
