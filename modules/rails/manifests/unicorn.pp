@@ -16,7 +16,6 @@ define rails::unicorn(
   $script_name = "unicorn_${name}"
 
   service { $script_name:
-    ensure    => running,
     enable    => true,
     hasstatus => false,
     start     => "/etc/init.d/${script_name} start",
