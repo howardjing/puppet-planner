@@ -14,7 +14,8 @@ define rails::application(
   $group = $user,
   $user_id = 444,
   $group_id = 444,
-  $ruby = '1.9.3-p448'
+  $ruby = '1.9.3-p448',
+  $rails_environment = 'staging',
 ) {
 
   # === user and group setup start ===
@@ -71,7 +72,7 @@ define rails::application(
   rails::unicorn { $application:
     app_root          => "${deploy_path}/${application}/current",
     user              => $user,
-    rails_environment => 'staging'
+    rails_environment => $rails_environment
   }
 
 }
