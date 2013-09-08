@@ -1,6 +1,6 @@
 class planner (
   $server_name,
-  $rails_environment = 'staging'
+  $rails_environment
 ) {
 
   $application_name = 'planner'
@@ -13,8 +13,9 @@ class planner (
 
   # install rbenv + set up capistrano
   rails::application { $application_name:
-    user => 'deployer',
-    ruby => '2.0.0-p247'
+    user              => 'deployer',
+    ruby              => '2.0.0-p247',
+    rails_environment => $rails_environment
   }
 
   # some variables for nginx
