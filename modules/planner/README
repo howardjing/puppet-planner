@@ -1,0 +1,6 @@
+For setting up the planner app
+Depends on:
+  - nodejs
+  - nginx
+  - mongodb
+  - rails
