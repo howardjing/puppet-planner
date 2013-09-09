@@ -3,4 +3,6 @@ Depends on:
   - nodejs
   - nginx
   - mongodb
+  - phantomjs (for web crawling)
   - rails
+

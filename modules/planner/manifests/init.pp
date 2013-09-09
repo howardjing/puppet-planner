@@ -11,6 +11,9 @@ class planner (
   # mongodb
   include mongodb
 
+  # phantomjs
+  include phantomjs
+
   # install rbenv + set up capistrano
   rails::application { $application_name:
     user              => 'deployer',
